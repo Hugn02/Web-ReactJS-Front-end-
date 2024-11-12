@@ -1,0 +1,40 @@
+.custom-box {
+    border-top: 1px solid #d1d5db;    /* Tạo viền trên */
+    border-bottom: 1px solid #d1d5db; /* Tạo viền dưới */
+    background-color: #f9fafb;        /* Màu nền xám nhạt */
+    text-align: center;               /* Căn giữa văn bản */
+    margin-left: 180px;
+    margin-right: 180px;
+  }
+  .custom-button {
+    display: inline-flex;              /* Sử dụng inline-flex để sắp xếp phần tử */
+    align-items: center;               /* Căn giữa theo trục dọc */
+    justify-content: center;           /* Căn giữa theo trục ngang */
+    border: 1px solid #9ca3af;         /* Viền xám (#9ca3af tương ứng với border-gray-400) */
+    padding: 0.5rem 1.25rem;           /* Khoảng đệm: 0.5rem (py-2) trên dưới, 1.25rem (px-5) trái phải */
+    margin: 1.25rem 0.75rem;           /* Khoảng cách ngoài: 1.25rem (my-5) trên dưới, 0.75rem (mx-3) trái phải */
+    border-radius: 9999px;             /* Bo tròn hoàn toàn cho border */
+    width: 75%;                        /* Đặt chiều rộng là 75% (w-3/4) */
+  }
+  
+  @media (min-width: 640px) {          /* Thiết lập kích thước cho màn hình từ sm (640px) trở lên */
+    .custom-button {
+      width: 50%;                      /* Đặt chiều rộng là 50% trên màn hình nhỏ (sm:w-1/2) */
+    }
+  }
+  .custom-input {
+    flex: 1;                  /* Cho phần tử giãn ra chiếm toàn bộ không gian có sẵn trong container flex */
+    outline: none;            /* Loại bỏ viền outline khi phần tử được chọn */
+    background-color: inherit;/* Kế thừa màu nền từ phần tử cha */
+    font-size: 0.875rem;
+    border: none;      /* Thiết lập cỡ chữ nhỏ (text-sm tương ứng với 14px hoặc 0.875rem) */
+  }
+  .custom-width {
+    width: 2rem; /* 1 rem tương đương với 16px */
+  }
+  .custom-element {
+    display: inline;         /* Sử dụng inline để phần tử hiển thị trên cùng một dòng */
+    width: 0.75rem;          /* Đặt chiều rộng là 0.75rem (w-3 tương đương với 12px) */
+    cursor: pointer;  
+  }
+  

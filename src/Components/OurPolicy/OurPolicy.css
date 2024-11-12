@@ -1,0 +1,44 @@
+.custom-container {
+    display: flex;                   /* Bố cục flex */
+    flex-direction: column;           /* Sắp xếp các phần tử con theo cột */
+    justify-content: space-around;    /* Căn đều khoảng cách giữa các phần tử */
+    gap: 3rem;                        /* Khoảng cách giữa các phần tử (48px, tương đương gap-12) */
+    text-align: center;               /* Căn giữa văn bản theo chiều ngang */
+    padding-top: 5rem;                /* Khoảng cách trên (80px, tương đương py-20) */
+    padding-bottom: 5rem;             /* Khoảng cách dưới (80px, tương đương py-20) */
+    font-size: 0.75rem;               /* Cỡ chữ nhỏ (12px, tương đương text-xs) */
+    color: #374151;    
+    margin-top: -100px;               /* Màu xám đậm, tương tự text-gray-700 */
+  }
+  .custom-container img{
+    width: 15%;
+  }
+  /* Thay đổi cho màn hình nhỏ (sm) */
+  @media (min-width: 640px) {
+    .custom-container {
+      flex-direction: row;            /* Đổi bố cục sang hàng ngang */
+      gap: 0.5rem;                    /* Giảm khoảng cách xuống còn 8px, tương đương gap-2 */
+      font-size: 0.875rem;            /* Cỡ chữ vừa (14px, tương đương text-sm) */
+    }
+  }
+  
+  /* Thay đổi cho màn hình trung bình (md) */
+  @media (min-width: 768px) {
+    .custom-container {
+      font-size: 1rem;                /* Cỡ chữ cơ bản (16px, tương đương text-base) */
+    }
+  }
+  .custom-element {
+    width: 3rem;          /* Thiết lập chiều rộng là 3rem (w-12 tương đương với 48px) */
+    margin: 0 auto;       /* Canh giữa phần tử theo chiều ngang (m-auto) */
+    margin-bottom: 1.25rem; /* Khoảng cách dưới là 1.25rem (mb-5 tương đương với 20px) */
+  }
+  .custom-text {
+    font-weight: 600; /* Thiết lập độ đậm cho chữ thành "semibold" */
+  }
+  .custom-text1 {
+    color: #9ca3af; /* Thiết lập màu xám 400 */
+  }
+  
+    
+  
