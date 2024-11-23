@@ -7,14 +7,29 @@ import add_product from '../Assets/add_icon_green.png'
 import remove_product from '../Assets/remove_icon_red.png'
 
 const CartItems = () => {
-    const {getTotalCartAmount,all_product,cartItems,removeFromCart,addToCart,removeToCart} = useContext(ShopContext);
+    const {getTotalCartAmount,all_product,cartItems,removeFromCart,addToCart,removeToCart,increaseQuantity} = useContext(ShopContext);
     const navigate = useNavigate();
+    
+    
+    const handleCheckout = () => {
+        if (Object.keys(cartItems).length === 0) {
+          alert("Giỏ hàng của bạn hiện đang trống!");
+          return;
+        }
+        navigate('/shipping');
+      };
+    //   const applyPromoCode = (code) => {
+    //     const discount = code === "SALE20" ? 0.2 : 0; // Giảm giá 20% nếu mã đúng
+    //     setTotal((prevTotal) => prevTotal - prevTotal * discount);
+    //     alert(discount > 0 ? "Áp dụng mã giảm giá thành công!" : "Mã giảm giá không hợp lệ.");
+    //   };
     return (
         <div className="cartitems">
             <div className="cartitems-format-main">
                 <p>Sản phẩm</p>
                 <p>Tên sản phẩm</p>
                 <p>Giá</p>
+                <p>Size</p>
                 <p className="hidden-text">Tăng</p>
                 <p>Số lượng</p>
                 <p className="hidden-text">Giảm</p>
@@ -22,24 +37,46 @@ const CartItems = () => {
                 <p>Xóa</p>
             </div>
             <hr />
-            {all_product.map((e)=>{
-                if(cartItems[e.id]>0){
-                    return <div>
-                    <div className="cartitems-format cartitems-format-main">
-                        <img src={e.image} alt="" className='carticon-product-icon' />
-                        <p>{e.name}</p>
-                        <p>${e.new_price}</p>
-                        <img className='icon' src={add_product} onClick={()=>{addToCart(e.id)}} alt="" />
-                        <button className='cartitems-quantity'>{cartItems[e.id]}</button>
-                        <img className='icon' src={remove_product} onClick={()=>{removeToCart(e.id)}} alt="" />
-                        <p>${e.new_price*cartItems[e.id]}</p>
-                        <img className='cartitems-remove-icon' src={remove_icon} onClick={()=>{removeFromCart(e.id)}} alt="" />
-                    </div>
-                    <hr />
-                </div>
-                }
-                return null;
-            })}
+            
+            {all_product.map((e) => {
+  const cartItem = cartItems[e.id];
+  if (cartItem && cartItem.quantity > 0) {
+    return (
+      <div key={e.id}>
+        <div className="cartitems-format cartitems-format-main">
+          <img src={cartItem.image} alt="" className="carticon-product-icon" />
+          <p>{cartItem.name}</p>
+          <p>${cartItem.new_price}</p>
+          <p>{cartItem.selectedSize || "Chưa chọn size"}</p>
+          <img
+            className="icon"
+            src={add_product}
+            onClick={() => increaseQuantity(e.id)} // Gọi hàm tăng số lượng
+            alt=""
+          />
+          <button className="cartitems-quantity">{cartItem.quantity}</button>
+          <img
+            className="icon"
+            src={remove_product}
+            onClick={() => removeToCart(e.id)} // Gọi hàm giảm số lượng
+            alt=""
+          />
+          <p>${cartItem.new_price * cartItem.quantity}</p>
+          <img
+            className="cartitems-remove-icon"
+            src={remove_icon}
+            onClick={() => removeFromCart(e.id)} // Xóa sản phẩm
+            alt=""
+          />
+        </div>
+        <hr />
+      </div>
+    );
+  }
+  return null;
+})}
+
+
             <div className="cartitems-down">
                 <div className="cartitems-total">
                     <h1>Tổng số giỏ hàng</h1>
@@ -50,8 +87,9 @@ const CartItems = () => {
                         </div>
                         <hr />
                         <div className="cartitems-total-item">
-                            <p>Phí vận chuyển</p>
-                            <p>${getTotalCartAmount()===0?0:2}</p>
+                        <p>Phí vận chuyển</p>
+                     <p>${getTotalCartAmount() === 0 ? 0 : 2}</p>
+
                         </div>
                         <hr />
                         <div className="cartitems-total-item">
@@ -59,7 +97,10 @@ const CartItems = () => {
                             <h3>${getTotalCartAmount()===0?0:getTotalCartAmount()+2}</h3>
                         </div>
                     </div>
-                    <button onClick={()=>navigate('/shipping')}>Mua hàng</button>
+                    <button onClick={handleCheckout}>Mua hàng</button>
+
+
+
                 </div>
                 <div className="cartitems-promocode">
                     <p>Nếu bạn có mã giảm giá, Nhập mã tại đây</p>

@@ -17,6 +17,7 @@ import NewCollections from './Components/NewCollections/NewCollections';
 import Popular from './Components/Popular/Popular';
 import SearchBar from './Components/Search/SearchBar';
 import NewsLetter from './Components/NewsLetter/NewsLetter';
+import all_product from './Components/Assets/all_product';
 
 
 function App() {
@@ -38,7 +39,9 @@ function App() {
         <Route path="product" element={<Product/>}>
           <Route path=':productId' element={<Product/>}/>
         </Route>
-        <Route path='/cart' element={<Cart/>}/>
+        {all_product.map((product) => (
+        <Route path='/cart' key={product.id} product={product} element={<Cart/>}/>
+      ))}
         <Route path='/shipping' element={<PlaceShipping/>}/>
       </Routes>
       <Routes>
