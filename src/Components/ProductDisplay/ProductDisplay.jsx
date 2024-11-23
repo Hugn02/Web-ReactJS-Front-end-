@@ -85,9 +85,9 @@ const ProductDisplay = (props) => {
           onClick={handleAddToCart} 
           disabled={!selectedSize}
           style={{
-            backgroundColor: !selectedSize ? "gray" : "blue",
+            backgroundColor: !selectedSize ? "gray" : "red",
             color: "white",
-            padding: "10px 20px",
+            padding: "20px 20px",
             border: "none",
             borderRadius: "5px",
             cursor: !selectedSize ? "not-allowed" : "pointer",
