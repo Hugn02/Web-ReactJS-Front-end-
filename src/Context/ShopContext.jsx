@@ -1,4 +1,4 @@
-import React, { createContext, useState } from 'react'
+import React, { createContext, useEffect, useState } from 'react'
 import all_product from '../Components/Assets/all_product'
 
 export const ShopContext = createContext(null);
@@ -30,6 +30,8 @@ const ShopContextProvider = (props) => {
     const [showSearch, setShowSearch] = useState(false);
     
     const [cartItems,setCartItems] = useState(getDefaultCart());
+    const url = "http://localhost:4000"
+    const [token,setToken] = useState("");
    
     
     // const addToCart = (itemId,size,product) => {
@@ -125,7 +127,7 @@ const ShopContextProvider = (props) => {
         });
       };
       
-      
+  
       
       
 
@@ -145,11 +147,15 @@ const ShopContextProvider = (props) => {
         return totalItem;
       };
       
-      
+      useEffect(()=>{
+        if(localStorage.getItem("token")){
+          setToken(localStorage.getItem("token"));
+        }
+      },[])
 
     
 
-    const contextValue = {getTotalCartItems,getTotalCartAmount,all_product,cartItems,addToCart,removeFromCart,search,setSearch,showSearch,setShowSearch,removeToCart,increaseQuantity};
+    const contextValue = {getTotalCartItems,getTotalCartAmount,all_product,cartItems,addToCart,removeFromCart,search,setSearch,showSearch,setShowSearch,removeToCart,increaseQuantity,url,token,setToken};
 
     return (
         <ShopContext.Provider value={contextValue}>
