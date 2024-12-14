@@ -6,11 +6,10 @@ import { ShopContext } from '../../Context/ShopContext';
 import cart_credit from '../Assets/cart_credit.png';
 import cart_truck from '../Assets/cart_truck.png';
 import cart_shieldcheck from '../Assets/cart_shieldcheck.png';
+import arrow_icon from '../Assets/breadcrum_arrow.png'
 
-const ProductDisplay = (props) => {
+const ProductDisplay = ({ product }) => {
   const { addToCart } = useContext(ShopContext);
-  const { product } = props;
-  
 
   const [selectedSize, setSelectedSize] = useState(""); // State kích thước
 
@@ -31,6 +30,13 @@ const ProductDisplay = (props) => {
   };
 
   return (
+
+    <div>
+    {/* Breadcrumb */}
+    <div className='breadcrum'>
+      Trang chủ <img src={arrow_icon} alt="" /> SHOP <img src={arrow_icon} alt="" /> {product.category} <img src={arrow_icon} alt="" /> {product.name}
+    </div>
+    
     <div className="productdisplay">
       <div className="productdisplay-left">
         <div className="productdisplay-img-list">
@@ -98,6 +104,8 @@ const ProductDisplay = (props) => {
         <p className="productdisplay-right-category"><span>Loại:</span> Metal Build Action Figure, Model Kit Figure, Chibi Figure, Blindbox Figure</p>
         <p className="productdisplay-right-category"><span>Nhãn:</span> #motornuclear, #inera, #moshow</p>
       </div>
+    </div>
+
     </div>
   );
 };

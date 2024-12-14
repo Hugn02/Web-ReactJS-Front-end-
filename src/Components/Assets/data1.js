@@ -37,112 +37,112 @@ import p36_img from "./product_36.png";
 
 let data1_product = [
   {
-    id: 6,
+    id: "6746938c5587a5687d8112e5",
     name: "Mô Hình Lắp Ráp MNP XH-07 Uy Viễn Thức White Ver Motor Nuclear",
     category: "motornuclear",
     image: p6_img,
-    new_price: 89.0,
+    new_price: 89,
     old_price: 120.5,
   },
   {
-    id: 9,
+    id: "6746938c5587a5687d8112e7",
     name: "Mô Hình Metal Build Hợp Kim Lắp Sẵn MNQ-04 Gan Jiang Black Dragon 1/72 Can Tương Motor Nuclear",
     category: "motornuclear",
     image: p9_img,
-    new_price: 85.0,
+    new_price: 93,
     old_price: 120.5,
     
     
   },
   {
-    id: 12,
+    id: "6746938c5587a5687d8112eb",
     name: "Mô Hình Lắp Sẵn MNQ-XH05 Lu Bu Motor Nuclear Metal Build Die-Cas",
     category: "motornuclear",
     image: p12_img,
-    new_price: 67.0,
+    new_price: 67,
     old_price: 120.5,
     
   },
   {
-    id: 5,
+    id: "6746938c5587a5687d8112e4",
     name: "Mô Hình Lắp Ráp MG MNP-XH03T Ao Bing AoBing Clear Ver Motor Nuclear",
     category: "motornuclear",
     image: p5_img,
-    new_price: 85.0,
+    new_price: 85,
     old_price: 120.5,
     
   },
   
   {
-    id: 18,
+    id: "6746938c5587a5687d8112f1",
     name: "Mô Hình Lắp Ráp RG/BE 1/144 SC-006 THUNDER INCISE GRACE SNAA",
     category: "inera",
     image: p18_img,
-    new_price: 53.0,
+    new_price: 53,
     old_price: 120.5,
     
   },
   {
-    id: 22,
-    name: "MMô Hình lắp ráp HG Core Gundam Mercone Veetwo Earthree Marsfour Jupitive Saturnix Uraven Nepeight 1/144",
+    id: "6746938c5587a5687d8112f0",
+    name: "Mô Hình Lắp Ráp HG 1/144 Gundam Calibarn ( THE WITCH FROM MERCURY) ",
     category: "inera",
     image: p22_img,
-    new_price: 66.0,
+    new_price: 92,
     old_price: 120.5,
     
   },
   {
-    id: 15,
+    id: "6746938c5587a5687d8112ee",
     name: "Mô Hình Lắp Ráp Thunder Devil Fish Equipinerat Thunderbolt 2.0 IN ERA",
     category: "inera",
     image: p15_img,
-    new_price: 57.0,
+    new_price: 57,
     old_price: 120.5,
     
   },
   {
-    id: 21,
+    id: "6746938c5587a5687d8112f4",
     name: "Mô Hình Lắp Ráp G3 HG 1/144 THE GUNDAM BASE LIMITED RX-78-2 GUNDAM",
     category: "inera",
     image: p21_img,
-    new_price: 85.0,
+    new_price: 85,
     old_price: 120.5,
     
   },
   
   {
-    id: 25,
+    id: "6746938c5587a5687d8112f8",
     name: "METAL BUILD 1/72 CHINA MOSHOW TOYS MCT-J03 MATSAMUNE DATE MASAMUNE",
     category: "moshow",
     image: p25_img,
-    new_price: 50.0,
+    new_price: 50,
     old_price: 120.5,
     
   },
   {
-    id: 34,
+    id: "6746938c5587a5687d811301",
     name: "Mô hình Metal Build 1/72 Asyura Iron Saga",
     category: "moshow",
     image: p34_img,
-    new_price: 97.0,
+    new_price: 97,
     old_price: 120.5,
     
   },
   {
-    id: 27,
+    id: "6746938c5587a5687d8112fa",
     name: "Mô Hình Jing Wei Hoàng Điểu HOBBY MECHA x MOSHOW TOYS",
     category: "moshow",
     image: p27_img,
-    new_price: 54.0,
+    new_price: 54,
     old_price: 120.5,
     
   },
   {
-    id: 31,
+    id: "6746938c5587a5687d8112fe",
     name: "Mô Hình Metal Build Takeda Shingen – Model Kit Moshow",
     category: "moshow",
     image: p31_img,
-    new_price: 76.0,
+    new_price: 76,
     old_price: 120.5,
     
   },

@@ -1,46 +1,25 @@
 import React, { createContext, useEffect, useState } from 'react'
-import all_product from '../Components/Assets/all_product'
+import axios from 'axios';
+
+
 
 export const ShopContext = createContext(null);
 
 
 const getDefaultCart = () => {
-    let cart = {};
-    for (let index = 0; index < all_product.length+1; index++) {
-       cart[index] = 0;
-    }
-    return cart;
-}
-
+  return {};
+};
 
 
 const ShopContextProvider = (props) => {
 
-    // const [sizeproduct, setSize] = useState([]);
-
-//   const addToSize = (product, size) => {
-//     setSize((prev) => [
-//       ...prev,
-//       { ...product, selectedSize: size, quantity: 1 },
-//     ]);
-    
-//   };
-
     const [search,setSearch] = useState('');
     const [showSearch, setShowSearch] = useState(false);
-    
     const [cartItems,setCartItems] = useState(getDefaultCart());
     const url = "http://localhost:4000"
     const [token,setToken] = useState("");
+    const [all_product,setProductList] = useState([])
    
-    
-    // const addToCart = (itemId,size,product) => {
-    //     setCartItems((prev)=>({...prev,
-    //         ...product,selectedSize: size,
-    //         [itemId]:prev[itemId]+1}));
-    //     console.log(cartItems);
-    // }
-
     const addToCart = (itemId, selectedSize, productDetails) => {
         setCartItems((prev) => {
           const existingItem = prev[itemId];
@@ -56,16 +35,6 @@ const ShopContextProvider = (props) => {
         });
       };
       
-      
-      
-      
-      
-      
-      
-    
-    
-    
-
       const removeToCart = (itemId) => {
         setCartItems((prev) => {
           const existingItem = prev[itemId];
@@ -84,10 +53,6 @@ const ShopContextProvider = (props) => {
         });
       };
       
-      
-      
-    
-
       const removeFromCart = (itemId) => {
         setCartItems((prev) => {
           const { [itemId]: _, ...rest } = prev;
@@ -99,19 +64,11 @@ const ShopContextProvider = (props) => {
 
       const getTotalCartAmount = () => {
         return Object.values(cartItems).reduce((total, item) => {
-          const price = item.new_price || 0; // Mặc định giá là 0 nếu undefined
-          const quantity = item.quantity || 0; // Mặc định số lượng là 0 nếu undefined
+          const price = item.new_price || 0; 
+          const quantity = item.quantity || 0; 
           return total + price * quantity;
         }, 0);
       };
-      
-      
-      
-      
-      
-      
-      
-      
       
       const increaseQuantity = (itemId) => {
         setCartItems((prev) => {
@@ -126,10 +83,6 @@ const ShopContextProvider = (props) => {
           return updatedCart;
         });
       };
-      
-  
-      
-      
 
       const getTotalCartItems = () => {
         console.log("cartItems:", cartItems);
@@ -146,17 +99,60 @@ const ShopContextProvider = (props) => {
       
         return totalItem;
       };
-      
-      useEffect(()=>{
-        if(localStorage.getItem("token")){
-          setToken(localStorage.getItem("token"));
+
+      const fetchProductList = async () => {
+        try {
+          console.log("Fetching product list...");
+          const response = await axios.get(url + "/api/product/list");
+          console.log("Response:", response.data);
+          if (response.data.success) {
+            setProductList(response.data.data);
+          } else {
+            console.error("Failed to fetch products:", response.data.message);
+          }
+        } catch (error) {
+          console.error("Error fetching product list:", error);
         }
-      },[])
+      };
+      
+      
+      
+      
+      useEffect(() => {
+        async function loadData() {
+          await fetchProductList();
+        }
+        loadData();
+      }, []);
+      
+     
+      
+      useEffect(() => {
+        const initializeCart = () => {
+          const cart = {};
+          all_product.forEach((product) => {
+            cart[product.id] = {
+              quantity: 0,
+              selectedSize: null,
+              new_price: product.new_price || 0,
+            };
+          });
+          setCartItems(cart);
+        };
+      
+        if (all_product.length > 0) {
+          initializeCart();
+        }
+      }, [all_product]);
+      
 
     
 
-    const contextValue = {getTotalCartItems,getTotalCartAmount,all_product,cartItems,addToCart,removeFromCart,search,setSearch,showSearch,setShowSearch,removeToCart,increaseQuantity,url,token,setToken};
-
+    const contextValue = {all_product,getTotalCartItems,getTotalCartAmount,cartItems,addToCart,removeFromCart,search,setSearch,showSearch,setShowSearch,removeToCart,increaseQuantity,url,token,setToken};
+    useEffect(() => {
+      console.log("All products loaded:", all_product);
+    }, [all_product]);
+    
     return (
         <ShopContext.Provider value={contextValue}>
             {props.children}
