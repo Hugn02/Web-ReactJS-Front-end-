@@ -8,6 +8,8 @@ const ShopContextProvider = (props) => {
     const [all_product, setProductList] = useState([]);
     const [token, setToken] = useState(localStorage.getItem("token") || "");
     const url = "http://localhost:4000";
+    const [showSearch, setShowSearch] = useState(false);
+    const [search, setSearch] = useState(""); // Thêm state quản lý tìm kiếm
 
     // Lưu giỏ hàng vào localStorage mỗi khi có sự thay đổi
     useEffect(() => {
@@ -140,6 +142,10 @@ const ShopContextProvider = (props) => {
         token,
         setToken,
         increaseQuantity,
+        search,
+        setSearch,
+        showSearch,
+        setShowSearch, 
     };
 
     return <ShopContext.Provider value={contextValue}>{props.children}</ShopContext.Provider>;

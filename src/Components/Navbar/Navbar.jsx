@@ -45,20 +45,42 @@ const Navbar = ({setShowLogin}) => {
                 <li onClick={()=>{setMenu("moshow")}}><Link style={{textDecoration: 'none'}} to='/moshow'>MOSHOW</Link>{menu==="moshow"?<hr/>:<></>}</li>
             </ul>
             <div className='nav-login-cart'>
-                <img onClick={()=>setShowSearch(true)} src={cart_search} alt="" />
-                {!token?<button onClick={()=>setShowLogin(true)}>Đăng ký</button>
-                :<div className='navbar-profile'>
-                    <img className='img-profile' src={profile_icon} alt="" />
-                    <ul className="nav-profile-dropdown">
-                        <li><img src={bag_icon} alt="" /><p>Đơn hàng</p></li>
-                        <hr />
-                        <li onClick={logout}><img src={logout_icon} alt="" /><p>Đăng xuất</p></li>
-                    </ul>
-                    </div>}
-                
-                <Link to='/cart'><img src={cart_icon} alt='' /></Link>
-                <div className='nav-cart-count'>{getTotalCartItems()}</div>
-            </div>
+  <img
+    onClick={() => {
+      if (setShowSearch) {
+        setShowSearch(true); // Gọi setShowSearch nếu nó tồn tại
+      } else {
+        console.error("setShowSearch không được định nghĩa trong ShopContext");
+      }
+    }}
+    src={cart_search}
+    alt=""
+  />
+  <Link to='/cart'>
+    <img src={cart_icon} alt='' />
+  </Link>
+  <div className='nav-cart-count'>{getTotalCartItems()}</div>
+  {!token ? (
+    <button onClick={() => setShowLogin(true)}>Đăng ký</button>
+  ) : (
+    <div className='navbar-profile'>
+      <img className='img-profile' src={profile_icon} alt="" />
+      <ul className="nav-profile-dropdown">
+        <li onClick={()=>navigate('/myorders')}>
+          <img src={bag_icon} alt="" />
+          <p>Đơn hàng</p>
+        </li>
+        <hr />
+        <li onClick={logout}>
+          <img src={logout_icon} alt="" />
+          <p>Đăng xuất</p>
+        </li>
+      </ul>
+    </div>
+  )}
+  
+</div>
+
 
         </div>
     )

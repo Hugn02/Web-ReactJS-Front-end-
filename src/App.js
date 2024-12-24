@@ -16,6 +16,7 @@ import NewCollections from './Components/NewCollections/NewCollections';
 import Popular from './Components/Popular/Popular';
 import SearchBar from './Components/Search/SearchBar';
 import NewsLetter from './Components/NewsLetter/NewsLetter';
+import MyOrders from './Pages/MyOrders/MyOrders';
 
 function App() {
   const [showLogin, setShowLogin] = useState(false);
@@ -37,6 +38,7 @@ function App() {
             <Route path='/shipping' element={<PlaceShipping />} />
             <Route path="/newcollections" element={<NewCollections />} />
             <Route path="/populars" element={<Popular />} />
+            <Route path="/myorders" element={<MyOrders /> } />
           </Routes>
           <NewsLetter setShowLogin={setShowLogin} />
           <Footer />
