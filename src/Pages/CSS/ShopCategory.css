@@ -69,8 +69,11 @@
     border-color: #007bff;
 }
 
-
-
+.shopcategory-loadmore:hover {
+    cursor: pointer;
+    background-color: #787878;
+    color: black;
+}
 
 
 @media(max-width:1280px){

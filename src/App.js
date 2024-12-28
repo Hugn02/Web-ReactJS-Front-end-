@@ -17,6 +17,7 @@ import Popular from './Components/Popular/Popular';
 import SearchBar from './Components/Search/SearchBar';
 import NewsLetter from './Components/NewsLetter/NewsLetter';
 import MyOrders from './Pages/MyOrders/MyOrders';
+import ChatPlugin from './Pages/ChatPlugin/ChatPlugin';
 
 function App() {
   const [showLogin, setShowLogin] = useState(false);

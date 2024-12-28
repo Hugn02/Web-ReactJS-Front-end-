@@ -36,7 +36,7 @@ const MyOrders = () => {
                             <p>${order.totalAmount}.00</p>
                             <p>Sản phẩm: {order.items.length}</p>
                             <p><span>&#x25cf;</span><b>{order.status}</b></p>
-                            <button>Theo dõi đơn hàng</button>
+                            <button onClick={fetchOrders}>Theo dõi đơn hàng</button>
                         </div>
                     )
                 })}

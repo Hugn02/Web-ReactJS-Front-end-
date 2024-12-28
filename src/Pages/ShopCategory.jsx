@@ -8,7 +8,7 @@ import Item from '../Components/Item/Item'
 const ShopCategory = (props) => {
     const { all_product, search, showSearch } = useContext(ShopContext);
     const [filteredProducts, setFilteredProducts] = useState(all_product); // Tạo state để lưu sản phẩm đã lọc
-
+    const [displayLimit, setDisplayLimit] = useState(8);
     const handleSearch = () => {
         let productsCopy = all_product.slice();
         if (showSearch && search) {
@@ -44,12 +44,16 @@ const ShopCategory = (props) => {
         setFilteredProducts(sorted); // Cập nhật danh sách sản phẩm đã sắp xếp
     };
 
+    const handleLoadMore = () => {
+        setDisplayLimit(displayLimit + 8); // Tăng giới hạn hiển thị thêm 12 sản phẩm
+    };
+
     return (
         <div className='shop-category'>
             <img className='shopcategory-banner' src={props.banner} alt="" />
             <div className="shopcategory-indexSort">
                 <p>
-                    <span>Trang 1-12</span> trong 36 sản phẩm
+                    <span>Trang 1-{Math.min(displayLimit, filteredProducts.length)}</span> trong {filteredProducts.length} sản phẩm
                 </p>
                 <div className="product-sort-container">
                 <select onChange={(e) => setSortType(e.target.value)}>
@@ -63,7 +67,10 @@ const ShopCategory = (props) => {
                 </div>
             </div>
             <div className="shopcategory-products">
-                {filteredProducts.map((item,i)=>{
+                {filteredProducts
+                .filter(item => props.category === item.category)
+                .slice(0, displayLimit)
+                .map((item,i)=>{
                     if(props.category===item.category){
                         return <Item key={i} id={item.id} name={item.name} image={item.image} new_price={item.new_price} old_price={item.old_price}/>
                     }
@@ -74,7 +81,7 @@ const ShopCategory = (props) => {
                
             </div>
             
-            <div className="shopcategory-loadmore">
+            <div className="shopcategory-loadmore" onClick={handleLoadMore}>
                 Xem thêm
             </div>
         </div>

@@ -1,0 +1,61 @@
+body {
+    font-family: Arial, sans-serif;
+  }
+
+  .contact-widget {
+    position: fixed;
+    bottom: 20px;
+    right: 20px;
+    z-index: 1000;
+  }
+
+  .contact-widget button {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    width: 180px;
+    margin: 5px 0;
+    padding: 10px;
+    border: none;
+    border-radius: 50px;
+    background-color: white;
+    color: #000;
+    font-size: 14px;
+    cursor: pointer;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    transition: all 0.3s ease;
+  }
+
+  .contact-widget button:hover {
+    background-color: #ffca28;
+  }
+
+  .contact-widget img {
+    width: 24px;
+    height: 24px;
+    margin-left: 10px;
+  }
+
+  .call-button {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: #ff3d00;
+    color: #fff;
+    width: 150px;
+    padding: 10px 15px;
+    border-radius: 50px;
+    font-size: 16px;
+    font-weight: bold;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.2);
+    cursor: pointer;
+    margin-top: 10px;
+  }
+
+  .call-button:hover {
+    background-color: #d32f2f;
+  }
+
+  .call-button span {
+    margin-left: 10px;
+  }
