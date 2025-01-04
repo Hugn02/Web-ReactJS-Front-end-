@@ -51,7 +51,7 @@ const LoginPopup = ({setShowLogin}) => {
                 <button type='submit'>{currState==="Đăng ký"?"Tạo tài khoản":"Đăng nhập"}</button>
                 <div className="login-popup-condition">
                     <input type="checkbox" required/>
-                    <p>Bằng việc đăng kí, tôi đồng ý với các điều khoản sử dụng và chính sách bảo mật.</p>
+                    <p>Bằng việc đăng ký hoặc đăng nhập, tôi đồng ý với các điều khoản sử dụng và chính sách bảo mật.</p>
                 </div>
                 {currState==="Đăng nhập"
                 ? <p>Tạo một tài khoản mới? <span onClick={()=>setCurrState("Đăng ký")}>Nhấn vào đây</span></p>

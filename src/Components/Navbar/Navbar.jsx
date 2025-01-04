@@ -9,7 +9,8 @@ import cart_search from '../Assets/search.png'
 import profile_icon from '../Assets/profile_icon.png'
 import bag_icon from '../Assets/bag_icon.png'
 import logout_icon from '../Assets/logout_icon.png'
-
+import infor_icon from '../Assets/infor_icon.png'
+import passwords_icon from '../Assets/password_icon.png'
 
 const Navbar = ({setShowLogin}) => {
 
@@ -35,11 +36,10 @@ const Navbar = ({setShowLogin}) => {
         <div className='navbar'>
             <div className='nav-logo'>
                 <img src={logo} alt="" />
-                <p>GunĐàm</p>
+                <p onClick={()=>{setMenu("shop")}}><Link style={{textDecoration: 'none'}} to='/'>GunĐàm</Link>{menu==="shop"}</p>
             </div>
             <img className='nav-dropdown' onClick={dropdown_toggle} src={nav_dropdown} alt="" />
             <ul ref={menuRef} className='nav-menu'>
-                <li onClick={()=>{setMenu("shop")}}><Link style={{textDecoration: 'none'}} to='/'>Shop</Link>{menu==="shop"?<hr/>:<></>}</li>
                 <li onClick={()=>{setMenu("inera")}}><Link style={{textDecoration: 'none'}} to='/inera'>INERA</Link>{menu==="inera"?<hr/>:<></>}</li>
                 <li onClick={()=>{setMenu("motornuclear")}}><Link style={{textDecoration: 'none'}} to='/motornuclear'>MOTOR NUCLEAR</Link>{menu==="motornuclear"?<hr/>:<></>}</li>
                 <li onClick={()=>{setMenu("moshow")}}><Link style={{textDecoration: 'none'}} to='/moshow'>MOSHOW</Link>{menu==="moshow"?<hr/>:<></>}</li>
@@ -75,6 +75,13 @@ const Navbar = ({setShowLogin}) => {
           <img src={logout_icon} alt="" />
           <p>Đăng xuất</p>
         </li>
+        <hr />
+        <li onClick={()=>navigate('/profile')}>
+          <img src={infor_icon} alt="" />
+          <p>Thông tin</p>
+        </li>
+
+  
       </ul>
     </div>
   )}

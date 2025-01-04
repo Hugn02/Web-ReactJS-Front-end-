@@ -12,22 +12,26 @@ const Product = () => {
 
     // Tìm sản phẩm với id tương ứng từ all_product
     useEffect(() => {
-        const product = all_product.find((item) => item.id === id);
-        setCurrentProduct(product); // Cập nhật sản phẩm hiện tại
+        if (all_product.length > 0) {
+            const product = all_product.find((item) => item._id === id);
+            setCurrentProduct(product);
+        }
     }, [id, all_product]);
 
-    console.log("Product ID from URL:", id); // Kiểm tra ID
-    console.log("Current Product:", currentProduct); // Kiểm tra dữ liệu sản phẩm
+    console.log("Params from URL:", { id });
+    console.log("Current Product:", currentProduct);
 
-    if (!currentProduct) {
-        return <p>Đang tải sản phẩm...</p>; // Hiển thị nếu sản phẩm chưa được tìm thấy
+    if (!id) {
+        return <p>Không tìm thấy sản phẩm. Vui lòng thử lại!</p>;
+    }else if(!currentProduct){
+        return <p>Đang tải sản phẩm...</p>;
     }
 
     return (
         <div>
-            <ProductDisplay product={currentProduct} /> {/* Truyền dữ liệu sản phẩm vào ProductDisplay */}
-            <DescriptionBox product={currentProduct} /> {/* Truyền dữ liệu sản phẩm vào DescriptionBox */}
-            <RelatedProducts product={currentProduct} /> {/* Truyền dữ liệu sản phẩm vào RelatedProducts */}
+            <ProductDisplay product={currentProduct} />
+            <DescriptionBox product={currentProduct} />
+            <RelatedProducts product={currentProduct} />
         </div>
     );
 };

@@ -27,11 +27,10 @@ const PlaceShipping = () => {
         const PlaceShipping = async (event) => {
             event.preventDefault();
         
-            // Tạo danh sách các sản phẩm trong giỏ hàng
             const orderItems = Object.entries(cartItems)
-                .filter(([itemId, itemDetails]) => itemDetails.quantity > 0) // Chỉ lấy các mục có quantity > 0
+                .filter(([itemId, itemDetails]) => itemDetails.quantity > 0)
                 .map(([itemId, itemDetails]) => {
-                    const product = all_product.find((prod) => prod._id === itemId); // Tìm sản phẩm trong danh sách sản phẩm
+                    const product = all_product.find((prod) => prod._id === itemId);
                     return {
                         ...itemDetails,
                         name: product?.name || "",
@@ -40,24 +39,20 @@ const PlaceShipping = () => {
                 });
         
             const orderData = {
-                // userId: token,
-                customer: data, // Thông tin người dùng từ form
-                items: orderItems, // Sản phẩm từ giỏ hàng
-                totalAmount: getTotalCartAmount() + (getTotalCartAmount() === 0 ? 0 : 2), // Tổng tiền
+                customer: data,
+                items: orderItems,
+                totalAmount: getTotalCartAmount() + (getTotalCartAmount() === 0 ? 0 : 2),
             };
         
             try {
                 const response = await axios.post(`${url}/api/order/create`, orderData, {
-                    headers: {
-                        Authorization: `Bearer ${token}`, // Gửi token nếu cần xác thực
-                    },
+                    headers: { token }, // Truyền token trong headers
                 });
         
                 if (response.data.success) {
                     alert("Đặt hàng thành công!");
-                    navigate("/cart"); 
-                    // Reset giỏ hàng
-                    localStorage.removeItem("cartItems"); // Xóa giỏ hàng khỏi localStorage
+                    navigate("/cart");
+                    localStorage.removeItem("cartItems");
                     setCartItems({});
                 } else {
                     alert(`Đặt hàng thất bại: ${response.data.message}`);
@@ -67,6 +62,7 @@ const PlaceShipping = () => {
                 alert("Đã xảy ra lỗi khi gửi đơn hàng!");
             }
         };
+        
         
         useEffect(()=>{
             if (!token) {

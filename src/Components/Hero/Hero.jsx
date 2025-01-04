@@ -9,6 +9,7 @@ import slider from '../Assets/slider-background.png'
 import slider2 from '../Assets/slider2.png'
 import slider3 from '../Assets/slider3.png'
 import slider4 from '../Assets/slider4.png'
+import slider5 from '../Assets/slider5.png'
 import './Hero.css'
 const Hero = () => {
     
@@ -61,7 +62,9 @@ const Hero = () => {
           <div className='slider'>
           <img src={slider3} alt="slider" />
           </div>
-          
+          <div className='slider'>
+          <img src={slider5} alt="slider" />
+          </div>
         </Slider>
         
       );

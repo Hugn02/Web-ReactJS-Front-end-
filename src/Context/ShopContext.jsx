@@ -8,6 +8,14 @@ const ShopContextProvider = (props) => {
     const [all_product, setProductList] = useState([]);
     const [token, setToken] = useState(localStorage.getItem("token") || "");
     const url = "http://localhost:4000";
+
+    useEffect(() => {
+        if (token) {
+            localStorage.setItem("token", token); // Lưu token vào localStorage
+        } else {
+            localStorage.removeItem("token"); // Xóa token nếu không tồn tại
+        }
+    }, [token]);
     const [showSearch, setShowSearch] = useState(false);
     const [search, setSearch] = useState(""); // Thêm state quản lý tìm kiếm
 

@@ -94,7 +94,7 @@
     border: 1px solid tomato;
     outline: 2px solid white;
     list-style: none;
-    margin-bottom: -90px;
+    margin-bottom: -125px;
     
 }
 .nav-profile-dropdown li{
@@ -109,6 +109,9 @@
 .nav-profile-dropdown li:hover{
     color: tomato;
 }
+
+
+
 @media(max-width:1280px){
     .navbar{
         padding: 12px 50px;
