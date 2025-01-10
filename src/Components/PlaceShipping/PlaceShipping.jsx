@@ -33,6 +33,11 @@ const PlaceShipping = () => {
                     const product = all_product.find((prod) => prod._id === itemId);
                     return {
                         ...itemDetails,
+                        productId: itemId,
+                        quantity: itemDetails.quantity,
+                        image: product?.image || "",
+                        price: product?.price || 0,
+                        new_price: product?.new_price || 0,
                         name: product?.name || "",
                         new_price: product?.new_price || 0,
                     };

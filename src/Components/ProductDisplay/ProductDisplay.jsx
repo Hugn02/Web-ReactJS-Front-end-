@@ -52,9 +52,7 @@ const ProductDisplay = ({ product }) => {
                 <div className="productdisplay-right">
                     <h1>{product.name}</h1>
                     <div className="productdisplay-right-stars">
-                        {[...Array(4)].map((_, idx) => <img key={idx} src={star_icon} alt="star" />)}
-                        <img src={star_dull_icon} alt="star-dull" />
-                        <p>(122)</p>
+                        {[...Array(5)].map((_, idx) => <img key={idx} src={star_icon} alt="star" />)}
                     </div>
                     <div className="productdisplay-right-prices">
                         <div className="productdisplay-right-price-old">${product.old_price}</div>
