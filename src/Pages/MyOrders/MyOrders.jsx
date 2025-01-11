@@ -1,23 +1,49 @@
-import React, { useContext, useEffect, useState } from "react";
-import "./MyOrders.css";
-import { ShopContext } from "../../Context/ShopContext";
-import axios from "axios";
-import parcel_icon from "../../Components/Assets/parcel_icon.png";
+import React, { useContext, useEffect, useState } from 'react';
+import './MyOrders.css';
+import { ShopContext } from '../../Context/ShopContext';
+import axios from 'axios';
+import parcel_icon from '../../Components/Assets/parcel_icon.png';
 
 const MyOrders = () => {
     const { url, token } = useContext(ShopContext);
     const [data, setData] = useState([]);
-    const [reviewProduct, setReviewProduct] = useState(null); // Quản lý sản phẩm cần đánh giá
-    const [rating, setRating] = useState(0); // Giá trị đánh giá
-    const [comment, setComment] = useState(""); // Nội dung bình luận
+    const [showModal, setShowModal] = useState(false);
+    const [rating, setRating] = useState(0);
+    const [hoverRating, setHoverRating] = useState(0);
+    const [comment, setComment] = useState('');
+    const [selectedOrder, setSelectedOrder] = useState(null);
 
     const fetchOrders = async () => {
-        const response = await axios.post(
-            url + "/api/order/userorders",
-            {},
-            { headers: { token } }
-        );
-        setData(response.data.data);
+        try {
+            const response = await axios.post(url + '/api/order/userorders', {}, { headers: { token } });
+            setData(response.data.data);
+        } catch (error) {
+            console.error('Error fetching orders:', error);
+        }
+    };
+
+    const handleReview = async () => {
+        if (!selectedOrder) return;
+
+        const productId = selectedOrder.items.map((item) => item.productId);
+
+        try {
+            const response = await axios.post(
+                url + '/api/review/add',
+                { productId, rating, comment },
+                { headers: { token } }
+            );
+            if (response.data.success) {
+                alert('Đánh giá thành công!');
+                setShowModal(false);
+                fetchOrders();
+            } else {
+                alert(response.data.message);
+            }
+        } catch (error) {
+            console.error('Error submitting review:', error);
+            alert('Đã xảy ra lỗi khi đánh giá sản phẩm!');
+        }
     };
 
     useEffect(() => {
@@ -25,30 +51,6 @@ const MyOrders = () => {
             fetchOrders();
         }
     }, [token]);
-
-    const handleReview = async (productId, rating, comment) => {
-        try {
-            const response = await axios.post(
-                url + "/api/review/add",
-                {
-                    productId,
-                    rating,
-                    comment,
-                },
-                { headers: { token } }
-            );
-
-            if (response.data.success) {
-                alert("Đánh giá thành công!");
-                setReviewProduct(null); // Ẩn form đánh giá sau khi thành công
-            } else {
-                alert(response.data.message);
-            }
-        } catch (error) {
-            console.error("Error submitting review:", error);
-            alert("Đã xảy ra lỗi khi đánh giá sản phẩm!");
-        }
-    };
 
     return (
         <div className="my-orders">
@@ -71,69 +73,69 @@ const MyOrders = () => {
                             <b>{order.status}</b>
                         </p>
                         <button onClick={fetchOrders}>Theo dõi đơn hàng</button>
-                        <button
-                            onClick={() => {
-                                if (order.status === "Đã giao") {
-                                    setReviewProduct(order.items[0]); // Lưu sản phẩm cần đánh giá
-                                } else {
-                                    alert(
-                                        "Chỉ có thể đánh giá khi trạng thái đơn hàng là Đã giao."
-                                    );
-                                }
-                            }}
-                        >
-                            Đánh giá sản phẩm
-                        </button>
+                        {order.items.every((item) => item.isReviewed) ? (
+                            <button disabled>Đã đánh giá</button>
+                        ) : order.status === 'Đã giao' ? (
+                            <button
+                                onClick={() => {
+                                    setSelectedOrder(order);
+                                    setShowModal(true);
+                                }}
+                            >
+                                Đánh giá
+                            </button>
+                        ) : (
+                            <button disabled>Chưa giao hàng</button>
+                        )}
                     </div>
                 ))}
             </div>
 
-            {reviewProduct && (
-    <div className="modal-overlay" onClick={() => setReviewProduct(null)}>
-        <div
-            className="modal-content"
-            onClick={(e) => e.stopPropagation()} // Ngăn chặn đóng modal khi click vào nội dung
-        >
-            <h3>Đánh giá sản phẩm: {reviewProduct.name}</h3>
-            <label>Đánh giá:</label>
-            <div className="rating">
-                {[1, 2, 3, 4, 5].map((star) => (
-                    <span
-                        key={star}
-                        className={star <= rating ? "star selected" : "star"}
-                        onClick={() => setRating(star)}
-                    >
-                        ★
-                    </span>
-                ))}
-            </div>
-            <label htmlFor="comment">Bình luận:</label>
-            <textarea
-                id="comment"
-                value={comment}
-                onChange={(e) => setComment(e.target.value)}
-            />
-            <div className="modal-actions">
-                <button
-                    className="btn-submit"
-                    onClick={() =>
-                        handleReview(reviewProduct.productId, rating, comment)
-                    }
-                >
-                    Gửi đánh giá
-                </button>
-                <button
-                    className="btn-cancel"
-                    onClick={() => setReviewProduct(null)}
-                >
-                    Hủy
-                </button>
-            </div>
-        </div>
-    </div>
-)}
-
-
+            {/* Modal đánh giá */}
+            {showModal && (
+                <div className="modal">
+                    <div className="modal-content">
+                        <span className="close" onClick={() => setShowModal(false)}>
+                            &times;
+                        </span>
+                        <h3>Đánh giá đơn hàng</h3>
+                        <p>
+                            {selectedOrder?.items.map((item, idx) => (
+                                <span key={idx}>
+                                    {item.name}
+                                    {idx < selectedOrder.items.length - 1 && ', '}
+                                </span>
+                            ))}
+                        </p>
+                        <label>Đánh giá:</label>
+                        <div className="star-rating">
+                            {[1, 2, 3, 4, 5].map((star) => (
+                                <span
+                                    key={star}
+                                    className={`star ${
+                                        (hoverRating || rating) >= star ? 'active' : ''
+                                    }`}
+                                    onClick={() => setRating(star)}
+                                    onMouseEnter={() => setHoverRating(star)}
+                                    onMouseLeave={() => setHoverRating(0)}
+                                >
+                                    &#9733;
+                                </span>
+                            ))}
+                        </div>
+                        <label htmlFor="comment">Bình luận:</label>
+                        <textarea
+                            id="comment"
+                            value={comment}
+                            onChange={(e) => setComment(e.target.value)}
+                        />
+                        <div className="modal-actions">
+                            <button onClick={handleReview}>Gửi đánh giá</button>
+                            <button onClick={() => setShowModal(false)}>Hủy</button>
+                        </div>
+                    </div>
+                </div>
+            )}
         </div>
     );
 };

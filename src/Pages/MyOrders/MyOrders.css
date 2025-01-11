@@ -41,89 +41,93 @@
 .btn-sp{
     display: flex;
 }
-/* Overlay cho modal */
-.modal-overlay {
+
+/* Modal */
+.modal {
     position: fixed;
     top: 0;
     left: 0;
     width: 100%;
     height: 100%;
-    background-color: rgba(0, 0, 0, 0.5); /* Nền mờ đen */
+    background-color: rgba(0, 0, 0, 0.5);
     display: flex;
     justify-content: center;
     align-items: center;
     z-index: 1000;
 }
 
-/* Nội dung modal */
 .modal-content {
     background-color: #fff;
     padding: 20px;
+    border-radius: 8px;
     width: 90%;
-    max-width: 400px;
-    border-radius: 10px;
-    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.25);
+    max-width: 500px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
     position: relative;
-    animation: slideIn 0.3s ease;
+    animation: fadeIn 0.3s;
+    font-size: 20px;
 }
-
-/* Hiệu ứng xuất hiện của modal */
-@keyframes slideIn {
-    from {
-        transform: translateY(-30px);
-        opacity: 0;
-    }
-    to {
-        transform: translateY(0);
-        opacity: 1;
-    }
+.modal-content h3{
+    text-align: center;
+    margin-bottom: 20px;
 }
-
-/* Tiêu đề modal */
-.modal-content h3 {
-    margin-bottom: 15px;
-    font-size: 1.5em;
-    color: #333;
+.modal-content p{
+    margin-bottom: 20px;
     text-align: center;
 }
-
-/* Nhãn của input và textarea */
-.modal-content label {
-    display: block;
+.modal-content .close {
+    position: absolute;
+    top: 10px;
+    right: 15px;
+    font-size: 24px;
     font-weight: bold;
-    margin-bottom: 8px;
-    color: #555;
+    cursor: pointer;
+    color: #333;
 }
 
-/* Input và Textarea */
-.modal-content input,
+/* Star Rating */
+.star-rating {
+    display: flex;
+    gap: 5px;
+    margin: 10px 0;
+    display: flex;
+    justify-content: center;
+}
+
+.star {
+    font-size: 40px;
+    color: #ccc;
+    cursor: pointer;
+    transition: color 0.2s;
+    
+}
+
+.star.active {
+    color: #ffd700;
+}
+
+.star:hover {
+    color: #ffc107;
+}
+
+/* Bình luận */
 .modal-content textarea {
-    width: 100%;
-    padding: 10px;
-    margin-bottom: 15px;
+    width: 96%;
+    padding: 8px;
+    margin-top: 10px;
     border: 1px solid #ccc;
-    border-radius: 5px;
-    font-size: 1em;
-    box-sizing: border-box;
-    transition: border-color 0.3s ease, box-shadow 0.3s ease;
+    border-radius: 4px;
+    margin-bottom: 10px;
 }
 
-.modal-content input:focus,
-.modal-content textarea:focus {
-    border-color: #007bff;
-    box-shadow: 0 0 5px rgba(0, 123, 255, 0.5);
-    outline: none;
-}
-
-/* Hành động (nút) trong modal */
+/* Nút hành động */
 .modal-actions {
     display: flex;
     justify-content: space-between;
     gap: 10px;
 }
 
-/* Nút Gửi đánh giá */
-.btn-submit {
+.modal-actions button:first-child {
     background-color: #007bff;
     color: #fff;
     padding: 10px 15px;
@@ -134,12 +138,15 @@
     transition: background-color 0.3s ease;
 }
 
-.btn-submit:hover {
+.modal-actions button:first-child:hover {
     background-color: #0056b3;
 }
 
-/* Nút Hủy */
-.btn-cancel {
+.modal-actions button:last-child:hover {
+    background-color: #c82333;
+}
+
+.modal-actions button:last-child {
     background-color: #dc3545;
     color: #fff;
     padding: 10px 15px;
@@ -150,47 +157,15 @@
     transition: background-color 0.3s ease;
 }
 
-.btn-cancel:hover {
-    background-color: #c82333;
-}
-
-/* Responsive cho thiết bị nhỏ */
-@media (max-width: 480px) {
-    .modal-content {
-        width: 95%;
-        padding: 15px;
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+        transform: scale(0.9);
     }
-    .modal-actions {
-        flex-direction: column;
+    to {
+        opacity: 1;
+        transform: scale(1);
     }
-}
-/* Modal CSS như trước */
-
-/* Rating Container */
-.rating {
-    display: flex;
-    justify-content: center;
-    margin: 15px 0;
-    gap: 5px;
-}
-
-/* Mặc định cho ngôi sao */
-.rating .star {
-    font-size: 2em;
-    color: #ccc; /* Màu mặc định của sao */
-    cursor: pointer;
-    transition: color 0.3s ease;
-}
-
-/* Ngôi sao được chọn */
-.rating .star.selected {
-    color: #ffc107; /* Màu vàng cho sao được chọn */
-}
-
-/* Hiệu ứng hover */
-.rating .star:hover,
-.rating .star:hover ~ .star {
-    color: #ffdb58; /* Màu vàng nhạt khi hover */
 }
 
 @media (max-width: 900px) {
@@ -203,3 +178,4 @@
         font-size: 10px;
     }
 }
+

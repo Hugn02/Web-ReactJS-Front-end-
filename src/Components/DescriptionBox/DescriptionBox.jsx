@@ -11,13 +11,13 @@ const DescriptionBox = ({ reviews }) => {
             {/* Tab điều hướng */}
             <div className="descriptionbox-navigator">
                 <div
-                    className={`descriptionbox-nav-box ${activeTab === 'description' ? 'active' : ''}`}
+                    className={`descriptionbox-nav-box ${activeTab === 'description' ? 'tab active' : 'tab'}`}
                     onClick={() => setActiveTab('description')}
                 >
                     Mô tả sản phẩm
                 </div>
                 <div
-                    className={`descriptionbox-nav-box ${activeTab === 'reviews' ? 'active' : ''}`}
+                    className={`descriptionbox-nav-box ${activeTab === 'reviews' ? 'tab active' : 'tab'}`}
                     onClick={() => setActiveTab('reviews')}
                 >
                     Đánh giá sản phẩm ({reviews?.length || 0})

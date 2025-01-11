@@ -92,7 +92,10 @@
     font-style: italic;
     
 }
-
+.tab:hover {
+    background-color: #e0e0e0;
+  }
+  
 @media(max-width:1280px){
     .descriptionbox{
         margin: 60px;
