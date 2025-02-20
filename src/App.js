@@ -19,6 +19,7 @@ import NewsLetter from './Components/NewsLetter/NewsLetter';
 import MyOrders from './Pages/MyOrders/MyOrders';
 import UserAccount from './Pages/UserAccount/UserAccount';
 import ScrollToTop from './Pages/ScrollToTop/ScrollToTop';
+import BrandPage from './Components/BrandPage/BrandPage';
 
 
 
@@ -39,6 +40,7 @@ function App() {
             <Route path='/inera' element={<ShopCategory banner={banner_inera} category="inera" />} />
             <Route path='/motornuclear' element={<ShopCategory banner={banner_motornuclear} category="motornuclear" />} />
             <Route path='/moshow' element={<ShopCategory banner={banner_moshow} category="moshow" />} />
+            <Route path="/brand/:brand" element={<BrandPage />} />
             <Route path="/product/:id" element={<Product />} />
             <Route path='/cart' element={<Cart />} />
             <Route path='/shipping' element={<PlaceShipping />} />

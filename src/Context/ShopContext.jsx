@@ -6,6 +6,8 @@ export const ShopContext = createContext(null);
 const ShopContextProvider = (props) => {
     const [cartItems, setCartItems] = useState({});
     const [all_product, setProductList] = useState([]);
+    const [brands, setBrands] = useState([]);
+    const [brandProducts, setBrandProducts] = useState({});
     const [token, setToken] = useState(localStorage.getItem("token") || "");
     const url = "http://localhost:4000";
 
@@ -131,10 +133,36 @@ const ShopContextProvider = (props) => {
           await axios.post(url + "/api/cart/add", { itemId }, { headers: { token } });
       }
   };
-  
 
     useEffect(() => {
         fetchProductList();
+    }, []);
+
+    const fetchBrands = async () => {
+        try {
+            const response = await axios.get(`${url}/api/brands/list`);
+            if (response.data.success) {
+                setBrands(response.data.data);
+            }
+        } catch (error) {
+            console.error("Lỗi khi lấy danh sách hãng:", error);
+        }
+    };
+
+    // Lấy sản phẩm theo hãng
+    const fetchProductsByBrand = async (brand) => {
+        try {
+            const response = await axios.get(`${url}/api/product/brand/${brand}`);
+            if (response.data.success) {
+                setBrandProducts((prev) => ({ ...prev, [brand]: response.data.data }));
+            }
+        } catch (error) {
+            console.error(`Lỗi khi lấy sản phẩm cho hãng ${brand}:`, error);
+        }
+    };
+
+    useEffect(() => {
+        fetchBrands();
     }, []);
 
     const contextValue = {
@@ -154,6 +182,9 @@ const ShopContextProvider = (props) => {
         setSearch,
         showSearch,
         setShowSearch, 
+        brands,
+        brandProducts,
+        fetchProductsByBrand,
     };
 
     return <ShopContext.Provider value={contextValue}>{props.children}</ShopContext.Provider>;

@@ -15,7 +15,7 @@ import passwords_icon from '../Assets/password_icon.png'
 const Navbar = ({setShowLogin}) => {
 
     const [menu,setMenu] = useState("shop");
-    const {getTotalCartItems,token,setToken} = useContext(ShopContext);
+    const {getTotalCartItems,token,setToken,brands} = useContext(ShopContext);
     const menuRef = useRef();
 
     const dropdown_toggle = (e) => {
@@ -43,6 +43,11 @@ const Navbar = ({setShowLogin}) => {
                 <li onClick={()=>{setMenu("inera")}}><Link style={{textDecoration: 'none'}} to='/inera'>INERA</Link>{menu==="inera"?<hr/>:<></>}</li>
                 <li onClick={()=>{setMenu("motornuclear")}}><Link style={{textDecoration: 'none'}} to='/motornuclear'>MOTOR NUCLEAR</Link>{menu==="motornuclear"?<hr/>:<></>}</li>
                 <li onClick={()=>{setMenu("moshow")}}><Link style={{textDecoration: 'none'}} to='/moshow'>MOSHOW</Link>{menu==="moshow"?<hr/>:<></>}</li>
+                {brands.map((brand, index) => (
+                    <li key={index}>
+                        <Link to={`/brand/${brand.name.toLowerCase()}`}>{brand.name}</Link>
+                    </li>
+                ))}
             </ul>
             <div className='nav-login-cart'>
   <img
