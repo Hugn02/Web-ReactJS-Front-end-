@@ -9,7 +9,7 @@ const ShopContextProvider = (props) => {
   const [brands, setBrands] = useState([]);
   const [brandProducts, setBrandProducts] = useState({});
   const [token, setToken] = useState(localStorage.getItem("token") || "");
-  const url = import.meta.env.VITE_API_URL || "http://localhost:4000";
+  const url = process.env.REACT_APP_API_URL || "http://localhost:4000";
 
   useEffect(() => {
     if (token) {
