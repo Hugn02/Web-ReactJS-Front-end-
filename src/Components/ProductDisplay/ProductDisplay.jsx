@@ -20,7 +20,9 @@ const ProductDisplay = ({ product }) => {
   const placeholderUrl = "https://placehold.co/500x500?text=No+Image";
 
   // Tạo URL ảnh đầy đủ
-  const imageUrl = product.image ? `${url}/images/${product.image}` : placeholderUrl;
+  const imageUrl = product.image 
+    ? (product.image.startsWith('http') || product.image.startsWith('/static') ? product.image : `${url}/images/${product.image}`) 
+    : placeholderUrl;
 
   const handleAddToCart = () => {
     if (!selectedSize) {

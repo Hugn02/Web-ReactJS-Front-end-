@@ -11,10 +11,11 @@ const Item = (props) => {
 
     // Xử lý URL ảnh: 
     // 1. Nếu props.image là một link tuyệt đối (bắt đầu bằng http), dùng luôn.
-    // 2. Nếu là tên file, nối với đường dẫn backend.
-    // 3. Nếu không có ảnh, dùng placeholder.
+    // 2. Nếu là ảnh static từ bundle (bắt đầu bằng /static), dùng luôn.
+    // 3. Nếu là tên file, nối với đường dẫn backend.
+    // 4. Nếu không có ảnh, dùng placeholder.
     const imageUrl = props.image 
-        ? (props.image.startsWith('http') ? props.image : `${url}/images/${props.image}`) 
+        ? (props.image.startsWith('http') || props.image.startsWith('/static') ? props.image : `${url}/images/${props.image}`) 
         : placeholderUrl;
 
     return (
