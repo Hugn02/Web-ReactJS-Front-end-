@@ -16,8 +16,11 @@ const ProductDisplay = ({ product }) => {
 
   const [selectedSize, setSelectedSize] = useState("");
 
+  // Định nghĩa URL ảnh mặc định (Placeholder) - Sử dụng URL tuyệt đối
+  const placeholderUrl = "https://placehold.co/500x500?text=No+Image";
+
   // Tạo URL ảnh đầy đủ
-  const imageUrl = `${url}/images/${product.image}`;
+  const imageUrl = product.image ? `${url}/images/${product.image}` : placeholderUrl;
 
   const handleAddToCart = () => {
     if (!selectedSize) {
@@ -69,8 +72,10 @@ const ProductDisplay = ({ product }) => {
               src={imageUrl}
               alt={product.name}
               onError={(e) => {
-                e.target.src =
-                  "https://via.placeholder.com/500x500?text=No+Image";
+                // Kiểm tra để tránh vòng lặp vô tận nếu ảnh placeholder cũng lỗi
+                if (e.target.src !== placeholderUrl) {
+                  e.target.src = placeholderUrl;
+                }
               }}
             />
           </div>
